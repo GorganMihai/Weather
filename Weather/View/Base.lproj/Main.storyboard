@@ -57,14 +57,8 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tkJ-Kk-Xvq">
-                                        <rect key="frame" x="213.5" y="59" width="160.5" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="FZD-sQ-q1R"/>
-                                        </constraints>
-                                    </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.max" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nyw-FF-RK7" userLabel="image View">
-                                        <rect key="frame" x="234" y="97.5" width="140" height="140.5"/>
+                                        <rect key="frame" x="234" y="58.5" width="140" height="140.5"/>
                                         <color key="tintColor" name="WeatherColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="140" id="7bU-Ad-vLy"/>
@@ -72,7 +66,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USe-4f-ziJ">
-                                        <rect key="frame" x="181.5" y="257" width="192.5" height="95.5"/>
+                                        <rect key="frame" x="181.5" y="218" width="192.5" height="95.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jA7-9N-VlV">
                                                 <rect key="frame" x="0.0" y="0.0" width="93" height="95.5"/>
@@ -96,37 +90,37 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="London" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYo-6r-cvn">
-                                        <rect key="frame" x="257" y="371.5" width="117" height="43"/>
+                                        <rect key="frame" x="257" y="332.5" width="117" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         <color key="textColor" name="WeatherColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4i7-Bp-AbI">
-                                        <rect key="frame" x="134" y="433.5" width="240" height="134.5"/>
+                                        <rect key="frame" x="134" y="394.5" width="240" height="179.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mjs-GI-ZlZ">
-                                        <rect key="frame" x="0.0" y="587" width="374" height="245"/>
+                                        <rect key="frame" x="0.0" y="593" width="374" height="150"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-7B-TTE">
-                                                <rect key="frame" x="0.0" y="0.0" width="760" height="245"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="760" height="150"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42v-W2-Ifr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="245"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                                                         <color key="backgroundColor" systemColor="systemRedColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="Rqr-rk-d17"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xp-2A-Qlj">
-                                                        <rect key="frame" x="110" y="0.0" width="100" height="245"/>
+                                                        <rect key="frame" x="110" y="0.0" width="100" height="150"/>
                                                         <color key="backgroundColor" systemColor="systemMintColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="mdZ-fX-khV"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zJ1-no-VWS">
-                                                        <rect key="frame" x="220" y="0.0" width="100" height="245"/>
+                                                        <rect key="frame" x="220" y="0.0" width="100" height="150"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <color key="tintColor" systemColor="systemGreenColor"/>
                                                         <constraints>
@@ -134,21 +128,21 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rj2-v2-zF0">
-                                                        <rect key="frame" x="330" y="0.0" width="100" height="245"/>
+                                                        <rect key="frame" x="330" y="0.0" width="100" height="150"/>
                                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="E8u-q9-m1p"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZu-Oa-7R2">
-                                                        <rect key="frame" x="440" y="0.0" width="100" height="245"/>
+                                                        <rect key="frame" x="440" y="0.0" width="100" height="150"/>
                                                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="Vnk-sd-Ltq"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MBv-eS-uee">
-                                                        <rect key="frame" x="550" y="0.0" width="100" height="245"/>
+                                                        <rect key="frame" x="550" y="0.0" width="100" height="150"/>
                                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                                         <color key="tintColor" systemColor="systemGrayColor"/>
                                                         <constraints>
@@ -156,7 +150,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCu-B7-Ti3">
-                                                        <rect key="frame" x="660" y="0.0" width="100" height="245"/>
+                                                        <rect key="frame" x="660" y="0.0" width="100" height="150"/>
                                                         <color key="backgroundColor" systemColor="tintColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="poe-Ps-ZYI"/>
@@ -166,7 +160,7 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="245" id="9Ra-77-VNP"/>
+                                            <constraint firstAttribute="height" constant="150" id="9Ra-77-VNP"/>
                                             <constraint firstItem="vrN-7B-TTE" firstAttribute="height" secondItem="FGI-Ar-iKn" secondAttribute="height" id="HqS-2U-CLb"/>
                                             <constraint firstItem="vrN-7B-TTE" firstAttribute="bottom" secondItem="3cq-e8-NIO" secondAttribute="bottom" id="KBA-qg-Z90"/>
                                             <constraint firstItem="vrN-7B-TTE" firstAttribute="trailing" secondItem="3cq-e8-NIO" secondAttribute="trailing" id="sPr-WJ-C4L"/>
@@ -176,12 +170,21 @@
                                         <viewLayoutGuide key="contentLayoutGuide" id="3cq-e8-NIO"/>
                                         <viewLayoutGuide key="frameLayoutGuide" id="FGI-Ar-iKn"/>
                                     </scrollView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNR-3u-NZT">
+                                        <rect key="frame" x="0.0" y="762" width="374" height="70"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="LEX-ks-eoa"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="uNR-3u-NZT" secondAttribute="trailing" id="5a4-Oe-mDN"/>
                                     <constraint firstItem="gvn-OO-Vp9" firstAttribute="leading" secondItem="wuZ-bV-DKj" secondAttribute="leading" id="BS4-yg-FpS"/>
-                                    <constraint firstAttribute="bottom" secondItem="Mjs-GI-ZlZ" secondAttribute="bottom" id="Ckd-qg-pDb"/>
                                     <constraint firstAttribute="trailing" secondItem="gvn-OO-Vp9" secondAttribute="trailing" id="Eqb-0F-SGN"/>
+                                    <constraint firstItem="uNR-3u-NZT" firstAttribute="leading" secondItem="wuZ-bV-DKj" secondAttribute="leading" id="Fdg-g2-g1E"/>
                                     <constraint firstItem="Mjs-GI-ZlZ" firstAttribute="leading" secondItem="wuZ-bV-DKj" secondAttribute="leading" id="GaJ-eC-abg"/>
+                                    <constraint firstAttribute="bottom" secondItem="uNR-3u-NZT" secondAttribute="bottom" id="dfY-6e-fNw"/>
                                     <constraint firstAttribute="trailing" secondItem="Mjs-GI-ZlZ" secondAttribute="trailing" id="kEw-tW-wOm"/>
                                 </constraints>
                             </stackView>
