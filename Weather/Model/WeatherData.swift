@@ -20,3 +20,9 @@ struct Main: Decodable{
 struct Weather: Decodable{
     let id: Int
 }
+
+struct Model: Decodable {
+    let time: String
+    let image: String
+    let temp: String
+}
