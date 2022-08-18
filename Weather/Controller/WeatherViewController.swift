@@ -9,20 +9,46 @@ import UIKit
 import CoreLocation
 
 
-class WeatherViewController: UIViewController {
-
+class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = table.dequeueReusableCell(withIdentifier: CollectionTableViewCell.identifier, for: indexPath) as! CollectionTableViewCell
+        
+        cell.configure(whith: models)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 148
+    }
+    
+    
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet var table: UITableView!
     
     
+    
+    
+    var models = [Model]()
     var weatherManager = WeatherManager()
     var locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        table.register(CollectionTableViewCell.nib(), forCellReuseIdentifier: CollectionTableViewCell.identifier)
+        table.delegate = self
+        table.dataSource = self
+        
         
         locationManager.delegate = self
 
@@ -32,6 +58,17 @@ class WeatherViewController: UIViewController {
         
         weatherManager.delegate = self
         searchTextField.delegate = self
+        
+        models.append(Model(time: "15:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "16:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "17:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "18:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "19:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "20:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "21:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "22:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "23:30", image: "sun.max.circle", temp: "25'"))
+        models.append(Model(time: "24:30", image: "sun.max.circle", temp: "25'"))
     }
     
     @IBAction func locationButtonTouch(_ sender: UIButton) {
@@ -52,6 +89,7 @@ extension WeatherViewController: UITextFieldDelegate{
         searchTextField.endEditing(true)
         
     }
+    
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -113,7 +151,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
         print(error)
     }
     
-    
-    
-    
+   
 }
+
