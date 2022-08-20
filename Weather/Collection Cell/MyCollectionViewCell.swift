@@ -9,6 +9,7 @@ import UIKit
 
 class MyCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet var dayLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var image: UIImageView!
     @IBOutlet var tempLabel: UILabel!
@@ -24,14 +25,15 @@ class MyCollectionViewCell: UICollectionViewCell {
         
     }
 
-    private func setImage() -> UIImage{
-        return UIImage(systemName: "sun.max.circle")!
+    private func setImage(_ imageName: String) -> UIImage{
+        return UIImage(systemName: imageName)!
     }
     
-    public func configure(with model: Model){
+    public func configure(with model: WeatherModel){
         self.timeLabel.text = model.time
-        self.image.image = setImage()
+        self.image.image = setImage(model.image)
         self.tempLabel.text = model.temp
+        self.dayLabel.text = model.weekDay
     }
     
     

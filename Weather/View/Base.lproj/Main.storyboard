@@ -102,25 +102,34 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Iq5-ip-ORI" userLabel="Time Table">
-                                <rect key="frame" x="0.0" y="622" width="414" height="200"/>
+                                <rect key="frame" x="0.0" y="624.5" width="414" height="148"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="ZIM-NT-uHh"/>
+                                    <constraint firstAttribute="height" constant="148" id="5LC-y5-lId"/>
                                 </constraints>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Updated: 15:15" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idK-61-LJk">
+                                <rect key="frame" x="20" y="782" width="144.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" name="WeatherColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ZeG-wH-EzE" secondAttribute="bottom" id="6CW-oe-M56"/>
+                            <constraint firstItem="idK-61-LJk" firstAttribute="top" secondItem="Iq5-ip-ORI" secondAttribute="bottom" constant="9.5" id="DH3-c6-xWs"/>
                             <constraint firstItem="wuZ-bV-DKj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="Eo7-IV-Yt7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="idK-61-LJk" secondAttribute="bottom" constant="60.5" id="FjC-l9-hb5"/>
+                            <constraint firstItem="Iq5-ip-ORI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Pmx-oL-xqX"/>
                             <constraint firstItem="ZeG-wH-EzE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="RFy-E6-O0J"/>
-                            <constraint firstItem="Iq5-ip-ORI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RqI-E2-o55"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Iq5-ip-ORI" secondAttribute="bottom" constant="40" id="a8a-0m-l7I"/>
                             <constraint firstItem="ZeG-wH-EzE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bEe-71-PbV"/>
+                            <constraint firstItem="Iq5-ip-ORI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cmT-H0-RVb"/>
                             <constraint firstItem="ZeG-wH-EzE" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="cxp-1P-NjF"/>
+                            <constraint firstItem="Iq5-ip-ORI" firstAttribute="top" secondItem="wuZ-bV-DKj" secondAttribute="bottom" constant="205" id="fvu-lG-ueR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wuZ-bV-DKj" secondAttribute="trailing" constant="10" id="jv5-4k-zWG"/>
-                            <constraint firstItem="Iq5-ip-ORI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="koj-86-wsR"/>
+                            <constraint firstItem="idK-61-LJk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ljH-7Y-GGH"/>
                             <constraint firstItem="wuZ-bV-DKj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="m8P-J3-qKp"/>
                         </constraints>
                     </view>
@@ -130,11 +139,12 @@
                         <outlet property="searchTextField" destination="Zka-zb-Brx" id="7lZ-3b-v7j"/>
                         <outlet property="table" destination="Iq5-ip-ORI" id="D4A-ox-obs"/>
                         <outlet property="temperatureLabel" destination="jA7-9N-VlV" id="Qbn-2Q-Qdg"/>
+                        <outlet property="updateTimeLabel" destination="idK-61-LJk" id="FIQ-4a-fTI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="273.91304347826087" y="-506.25"/>
+            <point key="canvasLocation" x="493" y="-549"/>
         </scene>
     </scenes>
     <resources>

@@ -15,14 +15,14 @@ class CollectionTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         return UINib(nibName: "CollectionTableViewCell", bundle: nil)        
     }
     
-    func configure(whith models: [Model]){
+    func configure(whith models: [WeatherModel]){
         self.models = models
         collectionView.reloadData()
     }
     
     @IBOutlet var collectionView: UICollectionView!
     
-    var models = [Model]()
+    var models = [WeatherModel]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
