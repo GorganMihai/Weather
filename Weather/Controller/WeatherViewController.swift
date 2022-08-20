@@ -33,11 +33,11 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet var table: UITableView!
+    @IBOutlet var updateTimeLabel: UILabel!
     
     
     
-    
-    var models = [Model]()
+    var models = [WeatherModel]()
     var weatherManager = WeatherManager()
     var locationManager = CLLocationManager()
     
@@ -48,27 +48,14 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         table.register(CollectionTableViewCell.nib(), forCellReuseIdentifier: CollectionTableViewCell.identifier)
         table.delegate = self
         table.dataSource = self
-        
-        
+                
         locationManager.delegate = self
 
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-                
-        
+                        
         weatherManager.delegate = self
         searchTextField.delegate = self
-        
-        models.append(Model(time: "15:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "16:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "17:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "18:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "19:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "20:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "21:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "22:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "23:30", image: "sun.max.circle", temp: "25'"))
-        models.append(Model(time: "24:30", image: "sun.max.circle", temp: "25'"))
     }
     
     @IBAction func locationButtonTouch(_ sender: UIButton) {
@@ -99,7 +86,11 @@ extension WeatherViewController: UITextFieldDelegate{
         return true
     }
     
-    
+    func showApiKeyAlert(){
+        let alert = UIAlertController(title: "The API key is missing", message: "Plese insert your API key in WeatherManager.swift from openweathermap.org", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
                 
@@ -115,7 +106,10 @@ extension WeatherViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         if let city = textField.text   {
-            weatherManager.fetchWeather(city)
+            if !weatherManager.fetchWeather(city) {
+                showApiKeyAlert()
+            }
+            self.updateTimeLabel.text = setUpdateLabel()
         }
         
         searchTextField.text = ""
@@ -127,11 +121,17 @@ extension WeatherViewController: UITextFieldDelegate{
 
 extension WeatherViewController: WeatherManagerDelegate {
     
-    func didUpdateWeather (_ weatherManager: WeatherManager, weather: WeatherModel){
+    func didUpdateWeather (_ weatherManager: WeatherManager, weather: dailyWeatherModel){
         DispatchQueue.main.async {
             self.temperatureLabel.text = weather.temperatureString
             self.cityLabel.text = weather.cityName
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
+            self.models.removeAll()
+            for e in weather.dailyWeatherModel! {
+                self.models.append(e)
+            }
+            //self.models.append(WeatherModel(time: "0000", image: "xmark.octagon", temp: "250^"))
+            self.table.reloadData()
         }
 }}
 
@@ -143,7 +143,10 @@ extension WeatherViewController: CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
-            weatherManager.fechWeather(lat, lon)
+            if !weatherManager.fechWeather(lat, lon) {
+                showApiKeyAlert()
+            }
+            self.updateTimeLabel.text = setUpdateLabel()
         }
     }
     
@@ -151,6 +154,11 @@ extension WeatherViewController: CLLocationManagerDelegate {
         print(error)
     }
     
+    func setUpdateLabel() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return "Last Updated: \(formatter.string(from: Date.now))"
+    }
    
 }
 
