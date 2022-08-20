@@ -8,9 +8,18 @@
 import Foundation
 
 struct WeatherData: Decodable {
-    let name: String
+    let list: [wtList]
+    let city: City
+}
+
+struct wtList: Decodable{
     let main: Main
     let weather: [Weather]
+    let dt_txt: String
+}
+
+struct City: Decodable{
+    let name: String
 }
 
 struct Main: Decodable{
@@ -20,3 +29,19 @@ struct Main: Decodable{
 struct Weather: Decodable{
     let id: Int
 }
+
+struct WeatherModel: Decodable {
+    let time: String
+    let weekDay: String
+    let image: String
+    let temp: String
+}
+
+
+
+//struct WeatherDdata: Decodable {
+//    let name: String
+//    let main: Main
+//    let weather: [Weather]
+//}
+

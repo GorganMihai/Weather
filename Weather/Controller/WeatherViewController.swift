@@ -9,14 +9,35 @@ import UIKit
 import CoreLocation
 
 
-class WeatherViewController: UIViewController {
-
+class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = table.dequeueReusableCell(withIdentifier: CollectionTableViewCell.identifier, for: indexPath) as! CollectionTableViewCell
+        
+        cell.configure(whith: models)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 148
+    }
+    
+    
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet var table: UITableView!
+    @IBOutlet var updateTimeLabel: UILabel!
     
     
+    
+    var models = [WeatherModel]()
     var weatherManager = WeatherManager()
     var locationManager = CLLocationManager()
     
@@ -24,12 +45,15 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        table.register(CollectionTableViewCell.nib(), forCellReuseIdentifier: CollectionTableViewCell.identifier)
+        table.delegate = self
+        table.dataSource = self
+                
         locationManager.delegate = self
 
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-                
-        
+                        
         weatherManager.delegate = self
         searchTextField.delegate = self
     }
@@ -52,6 +76,7 @@ extension WeatherViewController: UITextFieldDelegate{
         searchTextField.endEditing(true)
         
     }
+    
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -78,6 +103,7 @@ extension WeatherViewController: UITextFieldDelegate{
         
         if let city = textField.text   {
             weatherManager.fetchWeather(city)
+            self.updateTimeLabel.text = setUpdateLabel()
         }
         
         searchTextField.text = ""
@@ -89,11 +115,17 @@ extension WeatherViewController: UITextFieldDelegate{
 
 extension WeatherViewController: WeatherManagerDelegate {
     
-    func didUpdateWeather (_ weatherManager: WeatherManager, weather: WeatherModel){
+    func didUpdateWeather (_ weatherManager: WeatherManager, weather: dailyWeatherModel){
         DispatchQueue.main.async {
             self.temperatureLabel.text = weather.temperatureString
             self.cityLabel.text = weather.cityName
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
+            self.models.removeAll()
+            for e in weather.dailyWeatherModel! {
+                self.models.append(e)
+            }
+            //self.models.append(WeatherModel(time: "0000", image: "xmark.octagon", temp: "250^"))
+            self.table.reloadData()
         }
 }}
 
@@ -106,6 +138,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             weatherManager.fechWeather(lat, lon)
+            self.updateTimeLabel.text = setUpdateLabel()
         }
     }
     
@@ -113,7 +146,11 @@ extension WeatherViewController: CLLocationManagerDelegate {
         print(error)
     }
     
-    
-    
-    
+    func setUpdateLabel() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return "Last Updated: \(formatter.string(from: Date.now))"
+    }
+   
 }
+

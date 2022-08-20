@@ -8,25 +8,24 @@
 import Foundation
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: dailyWeatherModel)
 }
 
 struct WeatherManager{
             
     func fetchWeather(_ cityName: String){
-        let urlSting = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=87bb39e6defcbb6fe766fe6ad0f231fc&units=metric"
-        performRequest(urlString: urlSting)
+        let urlSting = "https://api.openweathermap.org/data/2.5/forecast?q=\(cityName)&appid=87bb39e6defcbb6fe766fe6ad0f231fc&units=metric"
+        performMainRequest(urlString: urlSting)
     }
     
     func fechWeather(_ lat: Double, _ lon: Double){
-        let urlSting = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=87bb39e6defcbb6fe766fe6ad0f231fc&units=metric"
-        performRequest(urlString: urlSting)
-        
+        let urlSting = "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=87bb39e6defcbb6fe766fe6ad0f231fc&units=metric"
+        performMainRequest(urlString: urlSting)
     }
     
     var delegate: WeatherManagerDelegate?
     
-    func performRequest(urlString: String){
+    func performMainRequest(urlString: String){
         //1. Create a URL
         print("--------- Perform Request Start -------------")
         //Verific daca instanta a fost creata corespunzator
@@ -62,17 +61,18 @@ struct WeatherManager{
         }
     }
     
-    func parseJson(weatherData: Data) -> WeatherModel? {
+    func parseJson(weatherData: Data) -> dailyWeatherModel? {
         let decoder = JSONDecoder()
         do{
             let dcData = try decoder.decode(WeatherData.self, from: weatherData)
             
-            let cityName = dcData.name
-            let temp = dcData.main.temp
-            let idWeatherIcon = dcData.weather[0].id
+            let cityName = dcData.city.name
+            let temp = dcData.list[0].main.temp
+            let idWeatherIcon = dcData.list[0].weather[0].id
+            let dailyWeather: [wtList] = dcData.list            
                         
-            let weather = WeatherModel(condition: idWeatherIcon, cityName: cityName, temperature: temp)
-            
+            let weather = dailyWeatherModel(condition: idWeatherIcon, cityName: cityName, temperature: temp, dailyList: dailyWeather)
+
             return weather
             
                         
