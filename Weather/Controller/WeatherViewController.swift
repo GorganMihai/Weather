@@ -86,7 +86,11 @@ extension WeatherViewController: UITextFieldDelegate{
         return true
     }
     
-    
+    func showApiKeyAlert(){
+        let alert = UIAlertController(title: "The API key is missing", message: "Plese insert your API key in WeatherManager.swift from openweathermap.org", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
                 
@@ -102,7 +106,9 @@ extension WeatherViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         if let city = textField.text   {
-            weatherManager.fetchWeather(city)
+            if !weatherManager.fetchWeather(city) {
+                showApiKeyAlert()
+            }
             self.updateTimeLabel.text = setUpdateLabel()
         }
         
@@ -137,7 +143,9 @@ extension WeatherViewController: CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
-            weatherManager.fechWeather(lat, lon)
+            if !weatherManager.fechWeather(lat, lon) {
+                showApiKeyAlert()
+            }
             self.updateTimeLabel.text = setUpdateLabel()
         }
     }

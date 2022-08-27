@@ -6,28 +6,64 @@
 //
 
 import Foundation
+import UIKit
 
 protocol WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: dailyWeatherModel)
 }
 
-struct WeatherManager{
+func getApiKey () -> String? {
+    
+   guard let filePath = Bundle.main.path(forResource: "secret", ofType: "plist") else {
+       print("File not found")
+       return nil
+   }
+    
+    let plist = NSDictionary(contentsOfFile: filePath)
+    let result = plist?.object(forKey: "ClientKey") as! String
+    return result
+    
+    
+}
+
+
+struct WeatherManager {
+          
+    let ApiKey: String? = getApiKey()
+    
+    //
+    //let yourApiKey: String? = ......
+    //
             
-    func fetchWeather(_ cityName: String){
-        let urlSting = "https://api.openweathermap.org/data/2.5/forecast?q=\(cityName)&appid=87bb39e6defcbb6fe766fe6ad0f231fc&units=metric"
-        performMainRequest(urlString: urlSting)
+    func fetchWeather(_ cityName: String) -> Bool{
+        
+        if (ApiKey != nil) {
+            let urlSting = "https://api.openweathermap.org/data/2.5/forecast?q=\(cityName)&appid=\(ApiKey!)&units=metric"
+            performMainRequest(urlString: urlSting)
+            return true
+        }else{
+            print("Plese insert your API key from openweathermap.org")
+            return false
+        }
     }
     
-    func fechWeather(_ lat: Double, _ lon: Double){
-        let urlSting = "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=87bb39e6defcbb6fe766fe6ad0f231fc&units=metric"
-        performMainRequest(urlString: urlSting)
+    func fechWeather(_ lat: Double, _ lon: Double) -> Bool{
+        
+        if (ApiKey != nil) {
+            let urlSting = "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=\(ApiKey!)&units=metric"
+            performMainRequest(urlString: urlSting)
+            return true
+        }else{
+            print("Plese insert your API key from openweathermap.org")
+            return false
+        }
     }
-    
+        
     var delegate: WeatherManagerDelegate?
     
     func performMainRequest(urlString: String){
         //1. Create a URL
-        print("--------- Perform Request Start -------------")
+        print("Performe Request")
         //Verific daca instanta a fost creata corespunzator
         if let url = URL(string: urlString){
             
@@ -38,9 +74,8 @@ struct WeatherManager{
             let task = session.dataTask(with: url, completionHandler:
             {(data: Data?, response: URLResponse?, error: Error?) in
                 if error != nil {
-                    print("--------ERROR---------")
                     print(error!)
-                    return // iesire din functie datorita faptului ca a fost o eroare
+                    return
                 }
                 
                 if let safeData = data{
@@ -48,16 +83,13 @@ struct WeatherManager{
                     if let weather = parseJson(weatherData: safeData){
                         delegate?.didUpdateWeather(self, weather: weather)
                     }
-                    
-                   
-                    
                 }})
             
             //4. Start the task
             task.resume()
-           print("====== End Request =====")
+           print("End request")
         }else{
-            print("---- URL Instance Error")
+            print("URL instance error")
         }
     }
     
