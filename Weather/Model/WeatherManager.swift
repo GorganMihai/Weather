@@ -20,10 +20,13 @@ func getApiKey () -> String? {
    }
     
     let plist = NSDictionary(contentsOfFile: filePath)
-    let result = plist?.object(forKey: "ClientKey") as! String
+    guard let result = plist?.object(forKey: "ClientKey") as? String else {
+        print("Api Key not found")
+        return nil
+    }
+    
     return result
-    
-    
+        
 }
 
 
