@@ -32,7 +32,7 @@ func getApiKey () -> String? {
 
 struct WeatherManager {
           
-    let ApiKey: String? = getApiKey()
+    let ApiKey: String? = "87bb39e6defcbb6fe766fe6ad0f231fc" //getApiKey()
     
     //
     //let yourApiKey: String? = ......
