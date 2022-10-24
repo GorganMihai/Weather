@@ -25,7 +25,7 @@ $ git clone https://github.com/GorganMihai/Weather.git
 ```
 
 2) Add your OpenWeather API key
-<img src="./Img/Day.png" height = 200 >
+<img src="./Img/ApiKey.png" height = 200 >
 
 
 # Requirements 
