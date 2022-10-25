@@ -35,7 +35,7 @@ struct WeatherManager {
     let ApiKey: String? = getApiKey()
     
     //
-    //let ApiKey: String? = ...... Your API Kei
+    //let ApiKey: String? = ...... Your API Key
     //
             
     func fetchWeather(_ cityName: String) -> Bool{
